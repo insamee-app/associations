@@ -5,29 +5,29 @@ module.exports = {
   theme: {
     colors: {
       primary: {
-        base: '#0073E6',
-        dark: '#0049B3',
-        light: '#63A1FF',
+        base: '#007C77',
+        dark: '#004F4B',
+        light: '#4AACA6',
       },
       secondary: {
-        base: '#4FBE8E',
-        dark: '#088D60',
-        light: '#83F1BE',
+        base: '#F05D5E',
+        dark: '#B82834',
+        light: '#FF8F8B',
       },
       grey: {
-        base: '#839199',
-        dark: '#142130',
-        light: '#DCDEE4',
+        base: '#839990',
+        dark: '#090909',
+        light: '#DCE4E1',
       },
       'grey-secondary': {
-        base: '#889490',
-        dark: '#182C25',
-        light: '#DEE2E1',
+        base: '#948888',
+        dark: '#2C1818',
+        light: '#E2DEDE',
       },
       white: '#FCFDFD',
       black: '#000517',
-      negative: '#F33C3C',
-      positive: '#63ED92',
+      negative: '#FF6433',
+      positive: '#23A7F1',
     },
     extend: {
       animation: {
