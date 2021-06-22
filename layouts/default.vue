@@ -1,5 +1,7 @@
 <template>
   <div>
-    <Nuxt />
+    <main class="max-w-7xl mx-auto">
+      <Nuxt />
+    </main>
   </div>
 </template>

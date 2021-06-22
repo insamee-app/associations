@@ -6,7 +6,7 @@ export default {
 
 <template>
   <svg width="375" height="276" viewBox="0 0 375 276">
-    <g clip-path="url(#clip0)">
+    <g clip-path="url(#waiting)">
       <path
         d="M209.431 271.146C284.351 271.146 345.086 210.56 345.086 135.823C345.086 61.0862 284.351 0.5 209.431 0.5C134.511 0.5 73.776 61.0862 73.776 135.823C73.776 210.56 134.511 271.146 209.431 271.146Z"
         fill="#F2F2F2"
@@ -381,7 +381,7 @@ export default {
       />
     </g>
     <defs>
-      <clipPath id="clip0">
+      <clipPath id="waiting">
         <rect
           width="377"
           height="275"
