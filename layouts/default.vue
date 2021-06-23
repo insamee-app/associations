@@ -1,7 +1,12 @@
 <template>
   <div>
     <TheHeader :nav="navList" @open="toggleNav" />
-    <TheNavMobile :value="nav" :nav="navList" @close="toggleNav" />
+    <TheNavMobile
+      v-if="!$screen.md"
+      :value="nav"
+      :nav="navList"
+      @close="toggleNav"
+    />
     <main class="max-w-7xl mx-auto">
       <Nuxt />
     </main>
@@ -21,11 +26,15 @@ export default {
       const nav = [
         {
           name: 'Trouver des associations',
-          path: { name: 'associations' },
+          to: { name: 'associations' },
+        },
+        {
+          name: 'Trouver des mee',
+          href: this.$config.insameeURL + '/mee',
         },
         {
           name: 'Contact',
-          path: { name: 'contact' },
+          to: { name: 'contact' },
         },
       ]
       // nav.unshift(

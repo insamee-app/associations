@@ -2,6 +2,13 @@
   <InsameeResponsiveList>
     <template #filter>
       <InsameeAppCard class="w-full">
+        <div class="flex flex-row justify-end">
+          <InsameeAppButton v-if="mdAndDown" variant="secondary"
+            >Filtrer</InsameeAppButton
+          >
+        </div>
+      </InsameeAppCard>
+      <InsameeAppCard v-if="lgAndUp" class="w-full">
         <InsameeAppCardTitle>Filtres</InsameeAppCardTitle>
       </InsameeAppCard>
     </template>
@@ -57,6 +64,14 @@ export default {
         lastPage: 119,
       },
     }
+  },
+  computed: {
+    mdAndDown() {
+      return !this.$screen.lg
+    },
+    lgAndUp() {
+      return this.$screen.lg
+    },
   },
 }
 </script>

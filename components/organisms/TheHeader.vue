@@ -1,14 +1,24 @@
 <template>
   <InsameeHeader
     :icon-link="{ name: 'index' }"
-    icon-nav
+    :icon-nav="!$screen.md"
     @open="$emit('open', $event)"
   >
-    <template #nav
-      ><InsameeHeaderNav> <InsameeAppList :list="nav" row /> </InsameeHeaderNav>
+    <template #nav>
+      <InsameeHeaderNav v-if="$screen.md">
+        <InsameeAppList :list="nav" row />
+      </InsameeHeaderNav>
     </template>
     <template #actions>
-      <InsameeAppButton border :href="$config.insameeURL + '/signin'">
+      <InsameeAppButton
+        v-if="$screen.md"
+        empty
+        variant="secondary"
+        :href="$config.insameeURL + '/signup'"
+      >
+        Se connecter
+      </InsameeAppButton>
+      <InsameeAppButton border :href="$config.insameeURL + '/login'">
         S'inscrire
       </InsameeAppButton>
     </template>
