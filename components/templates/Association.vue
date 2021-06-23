@@ -9,20 +9,34 @@
       :text="text"
     />
     <div class="text-secondary-dark text-lg">Membres :</div>
-    <div v-if="profiles" class="space-y-8">
-      <InsameeProfileCard
-        v-for="profile in profiles"
-        :key="profile.id"
-        :last-name="profile.last_name"
-        :first-name="profile.first_name"
-        :current-role="profile.current_role"
-        :user-id="profile.user_id"
-        :text="profile.text"
-        :skills="profile.skills"
-        :associations="profile.associations"
-        :link="profile.link"
+    <section>
+      <div
+        v-if="profiles"
+        class="grid gap-2 lg:gap-8 grid-cols-1 md:grid-cols-2"
+      >
+        <InsameeProfileCard
+          v-for="profile in profiles"
+          :key="profile.id"
+          :last-name="profile.last_name"
+          :first-name="profile.first_name"
+          :current-role="profile.current_role"
+          :user-id="profile.user_id"
+          :text="profile.text"
+          :skills="profile.skills"
+          :associations="profile.associations"
+          :link="profile.link"
+        />
+      </div>
+      <InsameePagination
+        class="mt-8 max-w-lg mx-auto"
+        small
+        :previous-page="pagination.previousPage"
+        :next-page="pagination.nextPage"
+        :first-page="pagination.firstPage"
+        :current-page="pagination.currentPage"
+        :last-page="pagination.lastPage"
       />
-    </div>
+    </section>
   </div>
 </template>
 
@@ -58,6 +72,17 @@ export default {
       type: Array,
       default: undefined,
     },
+  },
+  data() {
+    return {
+      pagination: {
+        previousPage: 114,
+        nextPage: 116,
+        firstPage: 1,
+        currentPage: 115,
+        lastPage: 119,
+      },
+    }
   },
 }
 </script>
