@@ -44,7 +44,7 @@
         </InsameeFullContainerTitle>
         <InsameeFullContainerText class="mt-12">
           Sur <span class="text-primary-base">associations</span>, tu peux
-          trouver des associations avec lesquelles colaborer !
+          trouver des associations avec lesquelles collaborer !
         </InsameeFullContainerText>
       </div>
       <GraphicTeamWork :class="graphicStyle" />
