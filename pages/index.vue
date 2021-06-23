@@ -13,7 +13,7 @@
         </InsameeHeroBannerSubtitle>
       </template>
       <template #graphic>
-        <GraphicCommunity class="mx-auto mt-8" />
+        <GraphicCommunity class="flex-1 h-auto mx-auto mt-8 md:m-0 md:w-full" />
       </template>
     </InsameeHeroBanner>
     <InsameeFullContainer v-slot="{ graphicStyle }" around>
@@ -27,6 +27,7 @@
       </InsameeFullContainerText>
       <GraphicHavingFun :class="graphicStyle" />
     </InsameeFullContainer>
+    <InsameeAppHr class="my-8" />
     <InsameeFullContainer v-slot="{ graphicStyle }" around>
       <InsameeFullContainerTitle>
         Envie de rejoindre une association ?
@@ -37,6 +38,7 @@
       </InsameeFullContainerText>
       <GraphicWaiting :class="graphicStyle" />
     </InsameeFullContainer>
+    <InsameeAppHr class="my-8" />
     <InsameeFullContainer v-slot="{ graphicStyle }" around>
       <div>
         <InsameeFullContainerTitle>
