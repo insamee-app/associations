@@ -1,7 +1,7 @@
 <template>
   <InsameeProfile
     :last-name="profile.last_name"
-    :firt-name="profile.first_name"
+    :first-name="profile.first_name"
     :current-role="profile.current_role"
     :graduation-year="profile.graduation_year"
     :email="profile.user.email"
