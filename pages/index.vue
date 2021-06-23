@@ -8,7 +8,7 @@
       </template>
       <template #subtitle>
         <InsameeHeroBannerSubtitle>
-          Sur <span class="font-bold text-primary-base">Association</span>, tu
+          Sur <span class="font-bold text-primary-base">Associations</span>, tu
           pourras découvrir des associations ou trouver celle qu'il te faut.
         </InsameeHeroBannerSubtitle>
       </template>
