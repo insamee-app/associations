@@ -1,5 +1,5 @@
 <template>
-  <InsameeAppContainer>
+  <InsameeAppContainer class="max-w-4xl mx-auto">
     <Association
       :name="association.name"
       :school-name="association.school.name"
