@@ -20,7 +20,7 @@
       <InsameeFullContainerTitle>
         La vie associative, tu connais ?
       </InsameeFullContainerTitle>
-      <InsameeFullContainerText class="text-right">
+      <InsameeFullContainerText class="text-right self-end">
         Les <span class="text-primary-base">associations</span> organisent
         souvent des évènemnts ! Tu peux y rencontrer des personnes avec les
         mêmes centres d'intérêts que toi !
