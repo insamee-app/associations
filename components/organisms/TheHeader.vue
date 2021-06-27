@@ -10,15 +10,18 @@
       </InsameeHeaderNav>
     </template>
     <template #actions>
+      <InsameeAppButton v-if="loggedIn()" :to="{ name: 'associations' }">
+        Trouver des associations
+      </InsameeAppButton>
       <InsameeAppButton
-        v-if="$screen.md"
+        v-if="!loggedIn() && $screen.md"
         empty
         variant="secondary"
-        :href="$config.insameeURL + '/signup'"
+        :to="{ name: 'signup' }"
       >
         Se connecter
       </InsameeAppButton>
-      <InsameeAppButton border :href="$config.insameeURL + '/login'">
+      <InsameeAppButton v-if="!loggedIn()" border :to="{ name: 'login' }">
         S'inscrire
       </InsameeAppButton>
     </template>
@@ -26,6 +29,8 @@
 </template>
 
 <script>
+import { mapGetters } from 'vuex'
+
 export default {
   name: 'TheHeader',
   props: {
@@ -33,6 +38,9 @@ export default {
       type: Array,
       default: () => [],
     },
+  },
+  methods: {
+    ...mapGetters({ loggedIn: 'auth/loggedIn' }),
   },
 }
 </script>

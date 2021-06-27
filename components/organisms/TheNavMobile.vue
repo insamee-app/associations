@@ -1,17 +1,33 @@
 <template>
   <InsameeNavMobile :list="nav" :value="value" @close="close">
     <template #actions>
-      <InsameeAppButton border :href="$config.insameeURL + '/signin'">
-        S'inscrire
-      </InsameeAppButton>
-      <InsameeAppButton :href="$config.insameeURL + '/login'">
-        Se connecter
-      </InsameeAppButton>
+      <template v-if="loggedIn()">
+        <InsameeAppButton
+          :disabled="loadingLogout"
+          :loading="loadingLogout"
+          @click="logout"
+        >
+          Se déconnecter
+        </InsameeAppButton>
+      </template>
+      <template v-else>
+        <InsameeAppButton border :to="{ name: 'signup' }">
+          S'inscrire
+        </InsameeAppButton>
+        <InsameeAppButton :to="{ name: 'login' }">
+          Se connecter
+        </InsameeAppButton>
+      </template>
+    </template>
+    <template #errors>
+      <InsameeAppError :error-message="errorMessage" />
     </template>
   </InsameeNavMobile>
 </template>
 
 <script>
+import { mapGetters, mapActions } from 'vuex'
+
 export default {
   name: 'TheNavMobile',
   props: {
@@ -24,7 +40,25 @@ export default {
       default: () => [],
     },
   },
+  data() {
+    return {
+      errorMessage: '',
+      loadingLogout: false,
+    }
+  },
   methods: {
+    ...mapGetters({ loggedIn: 'auth/loggedIn' }),
+    ...mapActions(['auth/logout']),
+    async logout() {
+      this.loadingLogout = true
+      try {
+        await this['auth/logout']()
+        this.errorMessage = ''
+      } catch (error) {
+        this.errorMessage = error.message
+      }
+      this.loadingLogout = false
+    },
     close() {
       this.$emit('close', false)
     },

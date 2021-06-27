@@ -27,8 +27,12 @@ export default {
   // Global CSS: https://go.nuxtjs.dev/config-css
   css: [],
 
+  tailwindcss: {
+    jit: true,
+  },
+
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
-  plugins: [],
+  plugins: ['~/plugins/getProfile.client.js', '~/plugins/axios'],
 
   // Auto import components: https://go.nuxtjs.dev/config-components
   components: [
@@ -59,12 +63,19 @@ export default {
   ],
 
   // Axios module configuration: https://go.nuxtjs.dev/config-axios
-  axios: {},
+  axios: {
+    proxy: true,
+  },
 
+  proxy: {
+    '/api/**': process.env.BROWSER_BASE_URL,
+    '/auth/**': process.env.BROWSER_BASE_URL,
+  },
   // Build Configuration: https://go.nuxtjs.dev/config-build
   build: {},
 
   publicRuntimeConfig: {
     insameeURL: process.env.INSAMEE_URL,
+    tutoratURL: process.env.TUTORAT_URL,
   },
 }

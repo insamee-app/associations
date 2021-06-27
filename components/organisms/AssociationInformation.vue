@@ -3,13 +3,13 @@
     <div class="flex flex-row justify-center items-center">
       <InsameeAppProfileAvatar />
       <div class="ml-6">
-        <div class="text-xl font-bold">{{ name }}</div>
+        <div class="text-xl font-bold uppercase">{{ name }}</div>
         <div class="font-light">{{ schoolName }}</div>
       </div>
     </div>
     <div>
-      <div class="text-secondary-dark text-lg">{{ thematic }}</div>
-      <InsameeAppChips :texts="thematics" />
+      <div class="text-secondary-dark text-lg uppercase">{{ thematic }}</div>
+      <InsameeAppChips :texts="tags" />
     </div>
     <div class="text-justify">
       {{ text }}
@@ -37,7 +37,7 @@ export default {
       type: String,
       default: undefined,
     },
-    thematics: {
+    tags: {
       type: Array,
       default: undefined,
     },

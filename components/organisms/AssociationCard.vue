@@ -1,21 +1,19 @@
 <template>
-  <InsameeAppCard class="space-y-1">
+  <InsameeAppCard reduced :to="{ name: 'associations-id', params: { id } }">
     <div class="flex flex-row justify-between">
       <div class="flex flex-col flex-1">
-        <div class="font-bold text-xl">{{ name }}</div>
+        <div class="font-bold text-xl uppercase">{{ name }}</div>
         <div class="font-light">{{ schoolName }}</div>
       </div>
       <InsameeAppProfileAvatar size="small" :image-url="imageUrl" :alt="name" />
     </div>
     <div>
-      <div class="text-lg">{{ thematic }}</div>
-      <InsameeAppChips :texts="thematics" />
+      <div class="text-lg capitalize">{{ thematic }}</div>
+      <InsameeAppChips :texts="tags" />
     </div>
     <div>{{ text | cutText }}</div>
     <div class="flex flex-row justify-end">
-      <InsameeAppButton :to="{ name: 'associations-id', params: { id } }">
-        Voir plus
-      </InsameeAppButton>
+      <InsameeAppButton> Voir plus </InsameeAppButton>
     </div>
   </InsameeAppCard>
 </template>
@@ -41,7 +39,7 @@ export default {
       type: String,
       default: undefined,
     },
-    thematics: {
+    tags: {
       type: Array,
       default: undefined,
     },

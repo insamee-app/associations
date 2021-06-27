@@ -15,6 +15,8 @@
 </template>
 
 <script>
+import { mapGetters } from 'vuex'
+
 export default {
   data() {
     return {
@@ -25,23 +27,27 @@ export default {
     navList() {
       const nav = [
         {
-          name: 'Trouver des associations',
-          to: { name: 'associations' },
-        },
-        {
           name: 'Trouver des mee',
           href: this.$config.insameeURL + '/mee',
+        },
+        {
+          name: 'Trouver des tutorats',
+          href: this.$config.tutoratURL + '/tutorats',
         },
         {
           name: 'Contact',
           to: { name: 'contact' },
         },
       ]
-      // nav.unshift(
-      //   this.loggedIn()
-      //     ? { name: 'Mon profil', path: 'me' }
-      //     : { name: 'Acceuil', path: 'index' }
-      // )
+      nav.unshift(
+        this.loggedIn()
+          ? {
+              name: 'Mon profil',
+              href: this.$config.insameeURL + '/me',
+            }
+          : { name: 'Acceuil', to: { name: 'index' } }
+      )
+
       return nav
     },
   },
@@ -51,7 +57,7 @@ export default {
     },
   },
   methods: {
-    // ...mapGetters({ loggedIn: 'auth/loggedIn' }),
+    ...mapGetters({ loggedIn: 'auth/loggedIn' }),
     toggleNav(state) {
       this.nav = state
     },

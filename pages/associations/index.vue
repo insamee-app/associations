@@ -14,26 +14,45 @@
     </template>
     <template #cards>
       <InsameeResponsiveListCards>
-        <AssociationCard
-          v-for="value in 6"
-          :id="card.id"
-          :key="value"
-          :name="card.name"
-          :school-name="card.school.name"
-          :thematic="card.thematic"
-          :thematics="card.thematics"
-          :text="card.text"
-          :image-url="card.image_url"
-        />
+        <template v-if="$fetchState.pending">
+          <InsameeSkeletonCard
+            v-for="value in $store.state.filters.pagination.profiles.limit"
+            :key="value"
+            variant="association"
+          />
+        </template>
+        <template v-else>
+          <AssociationCard
+            v-for="association in associations"
+            :id="association.id"
+            :key="association.id"
+            :name="association.name"
+            :school-name="association.school.name"
+            :thematic="association.thematic.name"
+            :tags="getTexts(association.tags)"
+            :text="association.text"
+            :image-url="association.image_url"
+          />
+        </template>
         <template #pagination>
           <InsameeResponsiveListPagination>
             <InsameePagination
-              small
-              :previous-page="pagination.previousPage"
-              :next-page="pagination.nextPage"
-              :first-page="pagination.firstPage"
-              :current-page="pagination.currentPage"
-              :last-page="pagination.lastPage"
+              v-if="!$fetchState.pending"
+              :small="$screen.lg"
+              :previous-page="
+                pagination.previous_page_url
+                  ? pagination.current_page - 1
+                  : undefined
+              "
+              :next-page="
+                pagination.next_page_url
+                  ? pagination.current_page + 1
+                  : undefined
+              "
+              :first-page="pagination.first_page"
+              :current-page="pagination.current_page"
+              :last-page="pagination.last_page"
+              @pagination="refresh"
             />
           </InsameeResponsiveListPagination>
         </template>
@@ -43,27 +62,25 @@
 </template>
 
 <script>
+import getTexts from '@/mixins/getTexts'
+
 export default {
+  mixins: [getTexts],
+  middleware: 'authenticated',
   data() {
     return {
-      card: {
-        id: 1,
-        name: 'lorem ipsum',
-        school: {
-          name: 'ipsum lorem',
-        },
-        thematic: 'dolor',
-        thematics: ['lorem', 'upsum', 'dolor', 'sit amet'],
-        text: 'Assocation est une association de musique. Elle fait partie du pôle culturel de l Insa Centre Val de Loire',
-      },
-      pagination: {
-        previousPage: 114,
-        nextPage: 116,
-        firstPage: 1,
-        currentPage: 115,
-        lastPage: 119,
-      },
+      associations: [],
+      pagination: undefined,
     }
+  },
+  async fetch() {
+    const query = this.$store.getters['filters/getAssociationsSearchParams']
+    const path = '/api/v1/associations?' + query
+
+    const { data } = await this.$axios.get(path)
+
+    this.associations = data.data
+    this.pagination = data.meta
   },
   computed: {
     mdAndDown() {
@@ -71,6 +88,42 @@ export default {
     },
     lgAndUp() {
       return this.$screen.lg
+    },
+  },
+  watch: {
+    '$route.query'() {
+      this.parseUrl()
+      this.$fetch()
+      this.setRoute()
+    },
+  },
+  beforeMount() {
+    this.parseUrl()
+  },
+  methods: {
+    refresh(value) {
+      this.$store.commit('filters/setPagination', {
+        pagination: 'associations',
+        name: 'page',
+        value,
+      })
+      this.setRoute()
+    },
+    parseUrl() {
+      for (const query in this.$route.query) {
+        const value = this.$route.query[query]
+        this.$store.commit('filters/setPagination', {
+          pagination: 'associations',
+          name: query,
+          value,
+        })
+      }
+    },
+    setRoute() {
+      const query = this.$store.getters['filters/getAssociationsSearchParams']
+      this.$router.push({
+        path: `/associations?${query}`,
+      })
     },
   },
 }
