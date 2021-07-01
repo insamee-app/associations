@@ -27,12 +27,8 @@ export default {
     navList() {
       const nav = [
         {
-          name: 'Trouver des mee',
-          href: this.$config.insameeURL + '/mee',
-        },
-        {
-          name: 'Trouver des tutorats',
-          href: this.$config.tutoratURL + '/tutorats',
+          name: 'Le concept',
+          to: { name: 'concept' },
         },
         {
           name: 'Contact',
@@ -44,6 +40,7 @@ export default {
           ? {
               name: 'Mon profil',
               href: this.$config.insameeURL + '/me',
+              iconExternal: true,
             }
           : { name: 'Acceuil', to: { name: 'index' } }
       )

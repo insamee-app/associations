@@ -1,18 +1,27 @@
 <template>
   <InsameeHeader
-    :icon-link="{ name: 'index' }"
+    :name-link="{ name: 'index' }"
     :icon-nav="!$screen.md"
     @open="$emit('open', $event)"
   >
+    <template #name> Associations </template>
     <template #nav>
       <InsameeHeaderNav v-if="$screen.md">
         <InsameeAppList :list="nav" row />
       </InsameeHeaderNav>
     </template>
     <template #actions>
-      <InsameeAppButton v-if="loggedIn()" :to="{ name: 'associations' }">
-        Trouver des associations
-      </InsameeAppButton>
+      <template v-if="loggedIn()">
+        <InsameeAppButton :to="{ name: 'associations' }">
+          Trouver des associations
+        </InsameeAppButton>
+        <InsameeAppTeam
+          :link-tutorat="$config.tutoratURL"
+          :link-evenements="$config.insameeURL"
+          link-associations="/"
+          :link-insamee="$config.insameeURL"
+        />
+      </template>
       <InsameeAppButton
         v-if="!loggedIn() && $screen.md"
         empty

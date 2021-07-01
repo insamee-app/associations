@@ -2,6 +2,12 @@
   <InsameeNavMobile :list="nav" :value="value" @close="close">
     <template #actions>
       <template v-if="loggedIn()">
+        <InsameeAppTeam
+          :link-tutorat="$config.tutoratURL"
+          :link-evenements="$config.insameeURL"
+          link-associations="/"
+          :link-insamee="$config.insameeURL"
+        />
         <InsameeAppButton
           :disabled="loadingLogout"
           :loading="loadingLogout"
