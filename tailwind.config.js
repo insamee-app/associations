@@ -1,6 +1,6 @@
 module.exports = {
   purge: {
-    content: ['node_modules/insamee-components/src/components/**'],
+    content: ['node_modules/@insamee-app/components/src/components/**'],
   },
   theme: {
     colors: {
