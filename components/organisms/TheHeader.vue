@@ -16,6 +16,7 @@
           Trouver des associations
         </InsameeAppButton>
         <InsameeAppTeam
+          v-if="$screen.md"
           :link-tutorat="$config.tutoratURL"
           :link-evenements="$config.insameeURL"
           link-associations="/"
