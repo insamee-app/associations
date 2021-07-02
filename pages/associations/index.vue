@@ -2,7 +2,16 @@
   <InsameeResponsiveList>
     <template #filter>
       <InsameeAppCard class="w-full">
-        <div class="flex flex-row justify-end">
+        <div
+          class="flex flex-row items-center"
+          :class="{ 'justify-between': mdAndDown, 'justify-end': !mdAndDown }"
+        >
+          <InsameeAppLabel label="Éléments par page" />
+          <InsameeSelect
+            class="w-16 ml-2"
+            placeholder="XX"
+            :items="itemsPerPage"
+          />
           <InsameeAppButton v-if="mdAndDown" variant="secondary">
             Filtrer
           </InsameeAppButton>
@@ -10,7 +19,7 @@
       </InsameeAppCard>
       <InsameeAppCard v-if="lgAndUp" class="w-full">
         <InsameeAppCardTitle>Filtres</InsameeAppCardTitle>
-        <Filters @submit="filters" />
+        <Filters @submit="refreshFilters" />
       </InsameeAppCard>
     </template>
     <template #cards>
@@ -53,7 +62,7 @@
               :first-page="pagination.first_page"
               :current-page="pagination.current_page"
               :last-page="pagination.last_page"
-              @pagination="refresh"
+              @pagination="refreshPagination"
             />
           </InsameeResponsiveListPagination>
         </template>
@@ -72,11 +81,16 @@ export default {
     return {
       associations: [],
       pagination: undefined,
+      itemsPerPage: [
+        { text: '5', value: 5 },
+        { text: '10', value: 10 },
+        { text: '20', value: 20 },
+      ],
     }
   },
   async fetch() {
     const query = this.$store.getters['filters/getAssociationsSearchParams']
-    const path = '/api/v1/associations?' + query + '&serialize=card'
+    const path = `/api/v1/associations?${query}&serialize=card`
 
     const { data } = await this.$axios.get(path)
 
@@ -95,21 +109,12 @@ export default {
     '$route.query'() {
       this.parseUrl()
       this.$fetch()
-      // this.setRoute()
     },
   },
   beforeMount() {
     this.parseUrl()
   },
   methods: {
-    refresh(value) {
-      this.$store.commit('filters/setPagination', {
-        pagination: 'associations',
-        name: 'page',
-        value,
-      })
-      this.setRoute()
-    },
     parseUrl() {
       this.$store.commit('filters/resetFilters')
       for (const query in this.$route.query) {
@@ -126,19 +131,17 @@ export default {
         })
       }
     },
-    setRoute() {
-      const query = this.$store.getters['filters/getAssociationsSearchParams']
-      this.$router.push({
-        path: `/associations?${query}`,
+    refreshPagination(value) {
+      this.$store.commit('filters/setPagination', {
+        pagination: 'associations',
+        name: 'page',
+        value,
       })
+      this.setRoute()
     },
-    filters(data) {
+    refreshFilters(data) {
       for (const iterator in data) {
-        let value
-        if (typeof data[iterator] === 'string') value = data[iterator]
-        else if (typeof data[iterator] === 'object')
-          value = JSON.stringify(data[iterator].map((el) => el.value))
-
+        const value = data[iterator]
         this.$store.commit('filters/setFilters', {
           filter: 'associations',
           name: iterator,
@@ -146,6 +149,12 @@ export default {
         })
       }
       this.setRoute()
+    },
+    setRoute() {
+      const query = this.$store.getters['filters/getAssociationsSearchParams']
+      this.$router.push({
+        path: `/associations?${query}`,
+      })
     },
   },
 }

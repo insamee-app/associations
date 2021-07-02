@@ -27,8 +27,11 @@ export const mutations = {
   },
   setFilters(state, { filter, name, value }) {
     // Avoid unwanted value from url
-    if (Object.keys(state.filters[filter]).includes(name))
-      state.filters[filter][name] = value
+    if (Object.keys(state.filters[filter]).includes(name)) {
+      if (typeof value !== 'string')
+        state.filters[filter][name] = JSON.stringify(value)
+      else state.filters[filter][name] = value
+    }
   },
   resetFilters(state) {
     state.filters.associations = {
@@ -66,13 +69,16 @@ export const getters = {
     const searchParams = new URLSearchParams(data)
     return searchParams.toString()
   },
-  thematics(state) {
-    return state.filters.associations.thematics
+  name({ filters: { associations } }) {
+    return associations.name
   },
-  tags(state) {
-    return state.filters.associations.tags
+  thematics({ filters: { associations } }) {
+    return JSON.parse(associations.thematics)
   },
-  schools(state) {
-    return state.filters.associations.schools
+  tags({ filters: { associations } }) {
+    return JSON.parse(associations.tags)
+  },
+  schools({ filters: { associations } }) {
+    return JSON.parse(associations.schools)
   },
 }

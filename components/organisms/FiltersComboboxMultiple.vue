@@ -18,7 +18,7 @@
 
 <script>
 export default {
-  name: 'ComboboxMultiple',
+  name: 'FiltersComboboxMultiple',
   props: {
     value: {
       type: Array,
@@ -47,29 +47,13 @@ export default {
       return this.$store.getters[`data/${this.name}`]
     },
   },
-  watch: {
-    '$route.query'() {
-      this.emit()
-    },
-  },
   async created() {
     try {
       await this.$store.dispatch('data/fetch', this.name)
-      this.emit()
+      this.$emit('update', this.name)
     } catch (error) {
       this.error = error
     }
-  },
-  methods: {
-    // Get filters for the store (URL) and populate the combobox using fetched data
-    emit() {
-      const filters = JSON.parse(this.$store.getters[`filters/${this.name}`])
-      const data = this.$store.getters[`data/${this.name}`]
-      this.$emit(
-        'selected',
-        data.filter((el) => filters.includes(el.value))
-      )
-    },
   },
 }
 </script>
