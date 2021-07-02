@@ -951,10 +951,10 @@
   dependencies:
     purgecss "^4.0.3"
 
-"@insamee-app/components@^0.0.3":
-  version "0.0.3"
-  resolved "https://registry.yarnpkg.com/@insamee-app/components/-/components-0.0.3.tgz#1037bda46c4cf972b10053acb42ff896951f1d8a"
-  integrity sha512-kjkm/yB3AS51L7eA8GKWDRkpHKCaZ73feRprhuN6YAFVeE+Smmro9PHLmXhKzpW3cVyV2zwCzByscRn9gekw/w==
+"@insamee-app/components@^0.0.4":
+  version "0.0.4"
+  resolved "https://registry.yarnpkg.com/@insamee-app/components/-/components-0.0.4.tgz#419adebe9c4142dac7ef7faec03488d032da9c87"
+  integrity sha512-pI/TDACQQ2SH0SovKERksV3mGIh5cpNCdFYjbxBaKvcN37buBs25sMgjgGDke/TEbvw9lPx85Hxp0r6A8HKfwQ==
 
 "@koa/router@^9.0.1":
   version "9.4.0"

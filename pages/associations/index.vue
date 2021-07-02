@@ -3,13 +3,14 @@
     <template #filter>
       <InsameeAppCard class="w-full">
         <div class="flex flex-row justify-end">
-          <InsameeAppButton v-if="mdAndDown" variant="secondary"
-            >Filtrer</InsameeAppButton
-          >
+          <InsameeAppButton v-if="mdAndDown" variant="secondary">
+            Filtrer
+          </InsameeAppButton>
         </div>
       </InsameeAppCard>
       <InsameeAppCard v-if="lgAndUp" class="w-full">
         <InsameeAppCardTitle>Filtres</InsameeAppCardTitle>
+        <Filters @submit="filters" />
       </InsameeAppCard>
     </template>
     <template #cards>
@@ -75,7 +76,7 @@ export default {
   },
   async fetch() {
     const query = this.$store.getters['filters/getAssociationsSearchParams']
-    const path = '/api/v1/associations?' + query
+    const path = '/api/v1/associations?' + query + '&serialize=card'
 
     const { data } = await this.$axios.get(path)
 
@@ -94,7 +95,7 @@ export default {
     '$route.query'() {
       this.parseUrl()
       this.$fetch()
-      this.setRoute()
+      // this.setRoute()
     },
   },
   beforeMount() {
@@ -110,10 +111,16 @@ export default {
       this.setRoute()
     },
     parseUrl() {
+      this.$store.commit('filters/resetFilters')
       for (const query in this.$route.query) {
         const value = this.$route.query[query]
         this.$store.commit('filters/setPagination', {
           pagination: 'associations',
+          name: query,
+          value,
+        })
+        this.$store.commit('filters/setFilters', {
+          filter: 'associations',
           name: query,
           value,
         })
@@ -124,6 +131,21 @@ export default {
       this.$router.push({
         path: `/associations?${query}`,
       })
+    },
+    filters(data) {
+      for (const iterator in data) {
+        let value
+        if (typeof data[iterator] === 'string') value = data[iterator]
+        else if (typeof data[iterator] === 'object')
+          value = JSON.stringify(data[iterator].map((el) => el.value))
+
+        this.$store.commit('filters/setFilters', {
+          filter: 'associations',
+          name: iterator,
+          value,
+        })
+      }
+      this.setRoute()
     },
   },
 }
