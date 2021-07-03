@@ -1,32 +1,28 @@
 <template>
   <InsameeResponsiveList>
     <template #filter>
-      <InsameeAppCard class="w-full">
-        <div
-          class="flex flex-row items-center"
-          :class="{ 'justify-between': mdAndDown, 'justify-end': !mdAndDown }"
-        >
-          <InsameeAppLabel label="Éléments par page" />
-          <InsameeSelect
-            class="w-16 ml-2"
-            placeholder="XX"
-            :items="itemsPerPage"
-          />
-          <InsameeAppButton v-if="mdAndDown" variant="secondary">
+      <InsameeAppCard v-if="mdAndDown" class="w-full">
+        <div class="flex flex-row items-center justify-end">
+          <InsameeAppButton variant="secondary" @click="modalFilters = true">
             Filtrer
           </InsameeAppButton>
+          <Portal>
+            <InsameeAppModal
+              :value="modalFilters"
+              @outside="modalFilters = $event"
+            >
+              <FiltersCard @submit="refreshFilters" />
+            </InsameeAppModal>
+          </Portal>
         </div>
       </InsameeAppCard>
-      <InsameeAppCard v-if="lgAndUp" class="w-full">
-        <InsameeAppCardTitle>Filtres</InsameeAppCardTitle>
-        <Filters @submit="refreshFilters" />
-      </InsameeAppCard>
+      <FiltersCard v-if="lgAndUp" @submit="refreshFilters" />
     </template>
     <template #cards>
       <InsameeResponsiveListCards>
         <template v-if="$fetchState.pending">
           <InsameeSkeletonCard
-            v-for="value in $store.state.filters.pagination.profiles.limit"
+            v-for="value in 20"
             :key="value"
             variant="association"
           />
@@ -73,12 +69,15 @@
 
 <script>
 import getTexts from '@/mixins/getTexts'
+import { Portal } from '@linusborg/vue-simple-portal'
 
 export default {
+  components: { Portal },
   mixins: [getTexts],
   middleware: 'authenticated',
   data() {
     return {
+      modalFilters: false,
       associations: [],
       pagination: undefined,
       itemsPerPage: [
@@ -140,6 +139,7 @@ export default {
       this.setRoute()
     },
     refreshFilters(data) {
+      this.modalFilters = false
       for (const iterator in data) {
         const value = data[iterator]
         this.$store.commit('filters/setFilters', {

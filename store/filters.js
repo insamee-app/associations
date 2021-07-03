@@ -5,7 +5,6 @@ export const state = () => ({
       page: 1,
     },
     associations: {
-      limit: 10,
       page: 1,
     },
   },
