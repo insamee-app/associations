@@ -12,8 +12,8 @@
             :current-role="profile.current_role"
             :user-id="profile.user_id"
             :text="profile.text"
-            :skills="getTexts(profile.insameeProfile.skills)"
-            :associations="profile.insameeProfile.associations"
+            :skills="getTexts(profile.insamee_profile.skills)"
+            :associations="profile.insamee_profile.associations"
             :link="profile.link"
           />
         </div>

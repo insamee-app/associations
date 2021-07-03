@@ -4,7 +4,7 @@
       :name="name"
       :school-name="schoolName"
       :image-url="imageUrl"
-      :thematic="thematic"
+      :thematic="thematicName"
       :tags="tags"
       :text="text"
     />
@@ -40,7 +40,7 @@ export default {
       type: String,
       default: undefined,
     },
-    thematic: {
+    thematicName: {
       type: String,
       default: undefined,
     },

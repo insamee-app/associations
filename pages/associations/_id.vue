@@ -4,14 +4,14 @@
       :name="association.name"
       :school-name="association.school.name"
       :image-url="association.image_url"
-      :thematic="association.thematic.name"
+      :thematic-name="association.thematic.name"
       :tags="getTexts(association.tags)"
       :text="association.text"
       :profiles="profiles"
       :pagination="pagination"
       :loading="$fetchState.pending"
       :error="$fetchState.error"
-      @pagination="refresh"
+      @pagination="refreshProfilesPagination"
     />
   </InsameeAppContainer>
 </template>
@@ -53,14 +53,13 @@ export default {
     '$route.query'() {
       this.parseUrl()
       this.$fetch()
-      this.setRoute()
     },
   },
   beforeMount() {
     this.parseUrl()
   },
   methods: {
-    refresh(value) {
+    refreshProfilesPagination(value) {
       this.$store.commit('filters/setPagination', {
         pagination: 'profiles',
         name: 'page',
