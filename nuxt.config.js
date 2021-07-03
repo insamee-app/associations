@@ -32,7 +32,11 @@ export default {
   },
 
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
-  plugins: ['~/plugins/getProfile.client.js', '~/plugins/axios'],
+  plugins: [
+    '~/plugins/getProfile.client.js',
+    '~/plugins/axios',
+    '~/plugins/vue-scroll-lock.js',
+  ],
 
   // Auto import components: https://go.nuxtjs.dev/config-components
   components: [
