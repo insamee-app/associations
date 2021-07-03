@@ -4,7 +4,10 @@
     :icon-nav="!$screen.md"
     @open="$emit('open', $event)"
   >
-    <template #name> Associations </template>
+    <template #name>
+      <template v-if="$screen.md"> Associations </template>
+      <template v-else> <InsameeIconAssociations class="w-6 h-6" /> </template>
+    </template>
     <template #nav>
       <InsameeHeaderNav v-if="$screen.md">
         <InsameeAppList :list="nav" row />
