@@ -16,18 +16,23 @@
           </Portal>
         </div>
       </InsameeAppCard>
-      <FiltersCard v-if="lgAndUp" @submit="refreshFilters" />
+      <FiltersCard v-if="lgAndUp" class="w-full" @submit="refreshFilters" />
     </template>
     <template #cards>
-      <InsameeResponsiveListCards>
-        <template v-if="$fetchState.pending">
+      <InsameeResponsiveListCards
+        :loading="$fetchState.pending"
+        :pagination="pagination"
+        :pagination-total="paginationTotal"
+        :items-total="associations.length"
+      >
+        <template #skeletons>
           <InsameeSkeletonCard
             v-for="value in 20"
             :key="value"
             variant="association"
           />
         </template>
-        <template v-else>
+        <template #cards>
           <AssociationCard
             v-for="association in associations"
             :id="association.id"
@@ -36,15 +41,14 @@
             :school-name="association.school.name"
             :thematic="association.thematic.name"
             :tags="getTexts(association.tags)"
-            :text="association.text"
+            :text="association.short_text"
             :image-url="association.image_url"
           />
         </template>
         <template #pagination>
           <InsameeResponsiveListPagination>
             <InsameePagination
-              v-if="!$fetchState.pending"
-              :small="$screen.lg"
+              :small="mdAndDown"
               :previous-page="
                 pagination.previous_page_url
                   ? pagination.current_page - 1
@@ -102,6 +106,9 @@ export default {
     },
     lgAndUp() {
       return this.$screen.lg
+    },
+    paginationTotal() {
+      return this.pagination ? this.pagination.total : 0
     },
   },
   watch: {

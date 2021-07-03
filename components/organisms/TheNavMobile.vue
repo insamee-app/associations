@@ -20,11 +20,11 @@
         </div>
       </template>
       <template v-else>
+        <InsameeAppButton :to="{ name: 'login' }" variant="secondary">
+          Se connecter
+        </InsameeAppButton>
         <InsameeAppButton border :to="{ name: 'signup' }">
           S'inscrire
-        </InsameeAppButton>
-        <InsameeAppButton :to="{ name: 'login' }">
-          Se connecter
         </InsameeAppButton>
       </template>
     </template>

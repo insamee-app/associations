@@ -1,12 +1,14 @@
 <template>
   <div>
-    <TheHeader :nav="navList" @open="toggleNav" />
-    <TheNavMobile
-      v-if="!$screen.md"
-      :value="nav"
-      :nav="navList"
-      @close="toggleNav"
-    />
+    <client-only>
+      <TheHeader :nav="navList" @open="toggleNav" />
+      <TheNavMobile
+        v-if="!$screen.md"
+        :value="nav"
+        :nav="navList"
+        @close="toggleNav"
+      />
+    </client-only>
     <main class="max-w-7xl mx-auto">
       <Nuxt />
     </main>

@@ -1,6 +1,6 @@
 <template>
   <div class="text-xl text-center">
-    Vous allez être redirigé sur le portail d'enregistrement...
+    Vous allez être redirigé sur le portail d'enregistrements...
   </div>
 </template>
 

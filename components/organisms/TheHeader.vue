@@ -27,11 +27,11 @@
         v-if="!loggedIn() && $screen.md"
         empty
         variant="secondary"
-        :to="{ name: 'signup' }"
+        :to="{ name: 'login' }"
       >
         Se connecter
       </InsameeAppButton>
-      <InsameeAppButton v-if="!loggedIn()" border :to="{ name: 'login' }">
+      <InsameeAppButton v-if="!loggedIn()" border :to="{ name: 'signup' }">
         S'inscrire
       </InsameeAppButton>
     </template>
