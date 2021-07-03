@@ -25,12 +25,7 @@ export default {
     const path = '/api/v1/profiles'
     const { id } = params
 
-    const { data: profile } = await $axios.get(
-      `${path}/${id}?populate=insamee`,
-      {
-        withCredentials: true,
-      }
-    )
+    const { data: profile } = await $axios.get(`${path}/${id}?populate=insamee`)
 
     return {
       profile,
