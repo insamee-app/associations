@@ -1,5 +1,5 @@
 <template>
-  <form @submit.prevent="submit">
+  <form @submit.prevent="submit" @reset.prevent="reset">
     <FiltersLabeledInput
       v-model="filters.name"
       label="Nom"
@@ -53,8 +53,11 @@
         @update="updateComboboxMultiple"
       />
     </InsameeLabeledItem>
-    <div class="flex justify-end mt-4">
-      <InsameeAppButton variant="secondary" border type="submit">
+    <div class="flex justify-between mt-4">
+      <InsameeAppButton variant="secondary" border type="reset">
+        Réinitialiser
+      </InsameeAppButton>
+      <InsameeAppButton variant="secondary" type="submit">
         Valider
       </InsameeAppButton>
     </div>
@@ -80,6 +83,15 @@ export default {
     },
   },
   methods: {
+    reset() {
+      this.filters = {
+        name: '',
+        'thematics[]': [],
+        'tags[]': [],
+        'schools[]': [],
+      }
+      this.submit()
+    },
     submit() {
       this.$emit('submit', {
         name: this.filters.name,
