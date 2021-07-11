@@ -1,19 +1,38 @@
 <template>
-  <div class="space-y-8">
-    <div class="flex flex-row justify-center items-center">
+  <div class="relative">
+    <GraphicSmallBlob
+      class="
+        text-primary-base/10
+        fill-current
+        absolute
+        top-[4.5rem]
+        -left-52
+        pointer-events-none
+      "
+    />
+    <div class="flex flex-row justify-center items-center relative">
       <InsameeAppProfileAvatar />
       <div class="ml-6">
         <div class="text-xl font-bold uppercase">{{ name }}</div>
         <div class="font-light">{{ schoolName }}</div>
       </div>
     </div>
-    <div>
-      <div class="text-secondary-dark text-lg uppercase">{{ thematic }}</div>
+    <div class="relative mt-8">
+      <div class="text-primary-light text-lg capitalize">{{ thematic }}</div>
       <InsameeAppChips :texts="tags" />
     </div>
-    <div class="text-justify">
+    <div class="text-justify mt-8">
       {{ text }}
     </div>
+    <div class="flex justify-end mt-8">
+      <InsameeAppButton :disabled="email" :href="`mailto:${email}`">
+        Contacter l'association
+      </InsameeAppButton>
+    </div>
+    <p v-if="!email" class="text-justify font-bold max-w-sm mx-auto mt-2">
+      Cette association n’a renseigné aucun moyen de contact, mais vous pouvez
+      la contacter via ses membres !
+    </p>
   </div>
 </template>
 
@@ -42,6 +61,10 @@ export default {
       default: undefined,
     },
     text: {
+      type: String,
+      default: undefined,
+    },
+    email: {
       type: String,
       default: undefined,
     },

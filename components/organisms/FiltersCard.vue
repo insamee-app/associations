@@ -1,5 +1,5 @@
 <template>
-  <InsameeAppCard>
+  <InsameeAppCard border>
     <InsameeAppCardTitle>Filtres</InsameeAppCardTitle>
     <Filters @submit="$emit('submit', $event)" />
   </InsameeAppCard>

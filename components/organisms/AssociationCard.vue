@@ -1,5 +1,9 @@
 <template>
-  <InsameeAppCard reduced :to="{ name: 'associations-id', params: { id } }">
+  <InsameeAppCard
+    reduced
+    shadow
+    :to="{ name: 'associations-id', params: { id } }"
+  >
     <div class="flex flex-row justify-between">
       <div class="flex flex-col flex-1">
         <div class="font-bold text-xl uppercase">{{ name }}</div>

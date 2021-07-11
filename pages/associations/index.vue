@@ -1,30 +1,15 @@
 <template>
-  <InsameeResponsiveList>
-    <template #filter>
-      <InsameeAppCard v-if="mdAndDown" class="w-full">
-        <div class="flex flex-row items-center justify-end">
-          <InsameeAppButton variant="secondary" @click="modalFilters = true">
-            Filtrer
-          </InsameeAppButton>
-          <Portal>
-            <InsameeAppModal
-              :value="modalFilters"
-              @outside="modalFilters = $event"
-            >
-              <FiltersCard @submit="refreshFilters" />
-            </InsameeAppModal>
-          </Portal>
-        </div>
-      </InsameeAppCard>
-      <FiltersCard v-if="lgAndUp" class="w-full" @submit="refreshFilters" />
+  <InsameeResponsiveList
+    :full-filters="lgAndUp"
+    :action-filters="mdAndDown"
+    :total-pagination="paginationTotal"
+    :loading="$fetchState.pending"
+  >
+    <template #filters-full="{ classNames }">
+      <FiltersCard :class="classNames" @submit="refreshFilters" />
     </template>
-    <template #cards>
-      <InsameeResponsiveListCards
-        :loading="$fetchState.pending"
-        :pagination="pagination"
-        :pagination-total="paginationTotal"
-        :items-total="associations.length"
-      >
+    <template #cards="{ loading }">
+      <InsameeResponsiveListCards :loading="loading">
         <template #skeletons>
           <InsameeSkeletonCard
             v-for="value in 20"
@@ -45,28 +30,61 @@
             :image-url="association.image_url"
           />
         </template>
-        <template #pagination>
-          <InsameeResponsiveListPagination>
-            <InsameePagination
-              :small="mdAndDown"
-              :previous-page="
-                pagination.previous_page_url
-                  ? pagination.current_page - 1
-                  : undefined
-              "
-              :next-page="
-                pagination.next_page_url
-                  ? pagination.current_page + 1
-                  : undefined
-              "
-              :first-page="pagination.first_page"
-              :current-page="pagination.current_page"
-              :last-page="pagination.last_page"
-              @pagination="refreshPagination"
-            />
-          </InsameeResponsiveListPagination>
-        </template>
       </InsameeResponsiveListCards>
+    </template>
+    <template #error>
+      <div class="space-y-2 mt-4">
+        <p class="font-bold">
+          Désolé, aucune association ne correspond à ta recherche...
+        </p>
+        <p>
+          Mais si tu penses que c’est une erreur de notre part, tu peux nous
+          contacter pour palier à ce problème.
+        </p>
+        <p>
+          Tu peux aussi fonder ta propre association et nous serons ravis de
+          l’accueillir sur le site !
+        </p>
+      </div>
+      <div class="mt-8">
+        <InsameeAppButton empty :to="{ name: 'contact' }">
+          Nous contacter ?
+        </InsameeAppButton>
+      </div>
+    </template>
+    <template #filters-action>
+      <InsameeAppButton
+        shadow
+        variant="secondary"
+        class="mt-6"
+        @click="modalFilters = true"
+      >
+        {{ filterMessage }}
+      </InsameeAppButton>
+      <Portal>
+        <InsameeAppModal :value="modalFilters" @outside="modalFilters = $event">
+          <FiltersCard @submit="refreshFilters" />
+        </InsameeAppModal>
+      </Portal>
+    </template>
+    <template #pagination="{ classNames }">
+      <InsameeResponsiveListPagination :class="classNames">
+        <InsameePagination
+          :small="mdAndDown"
+          :previous-page="
+            pagination.previous_page_url
+              ? pagination.current_page - 1
+              : undefined
+          "
+          :next-page="
+            pagination.next_page_url ? pagination.current_page + 1 : undefined
+          "
+          :first-page="pagination.first_page"
+          :current-page="pagination.current_page"
+          :last-page="pagination.last_page"
+          @pagination="refreshPagination"
+        />
+      </InsameeResponsiveListPagination>
     </template>
   </InsameeResponsiveList>
 </template>
@@ -110,6 +128,11 @@ export default {
     paginationTotal() {
       return this.pagination ? this.pagination.total : 0
     },
+    filterMessage() {
+      return this.paginationTotal
+        ? 'Rechercher par filtres'
+        : "Essayer d'autres filtres"
+    },
   },
   watch: {
     '$route.query'() {
@@ -130,10 +153,13 @@ export default {
           name: query,
           value,
         })
+
         this.$store.commit('filters/setFilters', {
           filter: 'associations',
           name: query,
-          value,
+          // With one number, *[] value is a single value and not an array, so we need to convert it
+          value:
+            query.includes('[]') && !Array.isArray(value) ? [value] : value,
         })
       }
     },

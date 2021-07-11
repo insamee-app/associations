@@ -7,6 +7,7 @@
       :thematic="thematicName"
       :tags="tags"
       :text="text"
+      :email="email"
     />
     <div v-if="loading" class="grid gap-4 lg:gap-8 grid-cols-1 md:grid-cols-2">
       <InsameeSkeletonCard
@@ -49,6 +50,10 @@ export default {
       default: undefined,
     },
     text: {
+      type: String,
+      default: undefined,
+    },
+    email: {
       type: String,
       default: undefined,
     },

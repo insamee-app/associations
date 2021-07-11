@@ -1,7 +1,7 @@
 <template>
   <form @submit.prevent="submit">
     <FiltersLabeledInput
-      v-model="name"
+      v-model="filters.name"
       label="Nom"
       name="name"
       placeholder="Rechercher par nom"
@@ -18,8 +18,8 @@
         name="thematics"
         variant="secondary"
         placeholder="Sélectionner une / des thématiques"
-        :value="thematics"
-        @selected="thematics = $event"
+        :value="filters['thematics[]']"
+        @selected="filters['thematics[]'] = $event"
         @update="updateComboboxMultiple"
       />
     </InsameeLabeledItem>
@@ -33,8 +33,8 @@
         name="tags"
         variant="secondary"
         placeholder="Sélectionner un / des tags"
-        :value="tags"
-        @selected="tags = $event"
+        :value="filters['tags[]']"
+        @selected="filters['tags[]'] = $event"
         @update="updateComboboxMultiple"
       />
     </InsameeLabeledItem>
@@ -48,8 +48,8 @@
         name="schools"
         variant="secondary"
         placeholder="Sélectionner une / des écoles"
-        :value="schools"
-        @selected="schools = $event"
+        :value="filters['schools[]']"
+        @selected="filters['schools[]'] = $event"
         @update="updateComboboxMultiple"
       />
     </InsameeLabeledItem>
@@ -66,10 +66,12 @@ export default {
   name: 'Filters',
   data() {
     return {
-      name: '',
-      thematics: [],
-      tags: [],
-      schools: [],
+      filters: {
+        name: '',
+        'thematics[]': [],
+        'tags[]': [],
+        'schools[]': [],
+      },
     }
   },
   watch: {
@@ -80,10 +82,10 @@ export default {
   methods: {
     submit() {
       this.$emit('submit', {
-        name: this.name,
-        thematics: this.thematics.map((el) => el.value),
-        tags: this.tags.map((el) => el.value),
-        schools: this.schools.map((el) => el.value),
+        name: this.filters.name,
+        'thematics[]': this.filters['thematics[]'].map((el) => el.value),
+        'tags[]': this.filters['tags[]'].map((el) => el.value),
+        'schools[]': this.filters['schools[]'].map((el) => el.value),
       })
     },
     updateFilters() {
@@ -95,12 +97,11 @@ export default {
     updateComboboxMultiple(name) {
       const filter = this.$store.getters[`filters/${name}`]
       const data = this.$store.getters[`data/${name}`]
-
-      this[name] = data.filter((el) => filter.includes(el.value))
+      this.filters[name + '[]'] = data.filter((el) => filter.includes(el.value))
     },
     updateInput() {
       const filter = this.$store.getters[`filters/name`]
-      this.name = filter
+      this.filters.name = filter
     },
   },
 }

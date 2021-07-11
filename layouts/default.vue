@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div :class="{ 'xl:overflow-hidden': isIndex }">
     <client-only>
       <TheHeader :nav="navList" @open="toggleNav" />
       <TheNavMobile
@@ -48,6 +48,9 @@ export default {
       )
 
       return nav
+    },
+    isIndex() {
+      return this.$route.name === 'index'
     },
   },
   watch: {

@@ -16,7 +16,7 @@
         <GraphicCommunity class="flex-1 h-auto mx-auto mt-8 md:m-0 md:w-full" />
       </template>
     </InsameeHeroBanner>
-    <InsameeFullContainer v-slot="{ graphicStyle }" around>
+    <InsameeFullContainer v-slot="{ graphicStyle }" around type="top-left">
       <InsameeFullContainerTitle>
         La vie associative, tu connais ?
       </InsameeFullContainerTitle>
@@ -28,7 +28,7 @@
       <GraphicHavingFun :class="graphicStyle" />
     </InsameeFullContainer>
     <InsameeAppHr class="my-8" />
-    <InsameeFullContainer v-slot="{ graphicStyle }" around>
+    <InsameeFullContainer v-slot="{ graphicStyle }" around type="right">
       <InsameeFullContainerTitle>
         Envie de rejoindre une association ?
       </InsameeFullContainerTitle>
@@ -39,7 +39,7 @@
       <GraphicWaiting :class="graphicStyle" />
     </InsameeFullContainer>
     <InsameeAppHr class="my-8" />
-    <InsameeFullContainer v-slot="{ graphicStyle }" around>
+    <InsameeFullContainer v-slot="{ graphicStyle }" around type="bottom-left">
       <div>
         <InsameeFullContainerTitle>
           Un projet ambitieux ?

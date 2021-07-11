@@ -11,9 +11,9 @@ export const state = () => ({
   filters: {
     associations: {
       name: '',
-      thematics: '[]',
-      tags: '[]',
-      schools: '[]',
+      'thematics[]': [],
+      'tags[]': [],
+      'schools[]': [],
     },
   },
 })
@@ -27,17 +27,17 @@ export const mutations = {
   setFilters(state, { filter, name, value }) {
     // Avoid unwanted value from url
     if (Object.keys(state.filters[filter]).includes(name)) {
-      if (typeof value !== 'string')
-        state.filters[filter][name] = JSON.stringify(value)
+      if (Array.isArray(value))
+        state.filters[filter][name] = value.map((v) => +v)
       else state.filters[filter][name] = value
     }
   },
   resetFilters(state) {
     state.filters.associations = {
       name: '',
-      thematics: '[]',
-      tags: '[]',
-      schools: '[]',
+      'thematics[]': [],
+      'tags[]': [],
+      'schools[]': [],
     }
   },
 }
@@ -55,29 +55,30 @@ export const getters = {
     pagination: { associations: associationsPagination },
     filters: { associations: associationsFilters },
   }) {
-    const data = {}
+    const searchParams = new URLSearchParams()
     for (const property in associationsPagination) {
       const value = associationsPagination[property]
-      if (value) data[property] = value
+      if (value) searchParams.append(property, value)
     }
     for (const property in associationsFilters) {
       const value = associationsFilters[property]
-      if (property === 'name' && value) data[property] = value
-      else if (value.length > 2) data[property] = value
+      if (Array.isArray(value) && value.length > 0)
+        value.forEach((v) => searchParams.append(property, v))
+      else if (typeof value === 'string' && value)
+        searchParams.append(property, value)
     }
-    const searchParams = new URLSearchParams(data)
     return searchParams.toString()
   },
   name({ filters: { associations } }) {
     return associations.name
   },
   thematics({ filters: { associations } }) {
-    return JSON.parse(associations.thematics)
+    return associations['thematics[]']
   },
   tags({ filters: { associations } }) {
-    return JSON.parse(associations.tags)
+    return associations['tags[]']
   },
   schools({ filters: { associations } }) {
-    return JSON.parse(associations.schools)
+    return associations['schools[]']
   },
 }

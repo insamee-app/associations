@@ -1,5 +1,5 @@
 <template>
-  <InsameeAppContainer class="max-w-4xl mx-auto">
+  <InsameeAppContainer class="mx-auto" small>
     <Association
       :name="association.name"
       :school-name="association.school.name"
@@ -7,6 +7,7 @@
       :thematic-name="association.thematic.name"
       :tags="getTexts(association.tags)"
       :text="association.text"
+      :email="association.email"
       :profiles="profiles"
       :pagination="pagination"
       :loading="$fetchState.pending"
