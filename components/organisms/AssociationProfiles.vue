@@ -13,7 +13,7 @@
             :current-role="profile.current_role"
             :user-id="profile.user_id"
             :text="profile.text"
-            :skills="getTexts(profile.insamee_profile.skills)"
+            :focus-interests="getTexts(profile.insamee_profile.focus_interests)"
             :associations="profile.insamee_profile.associations"
             :link="profile.link"
           />

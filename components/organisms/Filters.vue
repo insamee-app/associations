@@ -54,10 +54,10 @@
       />
     </InsameeLabeledItem>
     <div class="flex justify-between mt-4">
-      <InsameeAppButton variant="secondary" border type="reset">
+      <InsameeAppButton variant="secondary" border type="reset" shadow>
         Réinitialiser
       </InsameeAppButton>
-      <InsameeAppButton variant="secondary" type="submit">
+      <InsameeAppButton variant="secondary" type="submit" shadow>
         Valider
       </InsameeAppButton>
     </div>
