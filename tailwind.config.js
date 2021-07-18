@@ -30,8 +30,8 @@ module.exports = {
         dark: '#F7F7F7',
       },
       black: '#000517',
-      negative: '#FF6433',
-      positive: '#23A7F1',
+      negative: '#F33C3C',
+      positive: '#63ED92',
     },
     extend: {
       animation: {
