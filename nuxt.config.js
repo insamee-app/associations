@@ -35,6 +35,7 @@ export default {
     '~/plugins/getProfile.server.js',
     '~/plugins/axios',
     '~/plugins/vue-scroll-lock.js',
+    '~/plugins/vuelidate.js',
   ],
 
   // Auto import components: https://go.nuxtjs.dev/config-components
