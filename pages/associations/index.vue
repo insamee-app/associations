@@ -63,7 +63,11 @@
       </InsameeAppButton>
       <Portal>
         <InsameeAppModal :value="modalFilters" @outside="modalFilters = $event">
-          <FiltersCard @submit="refreshFilters" />
+          <FiltersCard
+            closable
+            @submit="refreshFilters"
+            @close="modalFilters = !$event"
+          />
         </InsameeAppModal>
       </Portal>
     </template>
@@ -102,11 +106,6 @@ export default {
       modalFilters: false,
       associations: [],
       pagination: undefined,
-      itemsPerPage: [
-        { text: '5', value: 5 },
-        { text: '10', value: 10 },
-        { text: '20', value: 20 },
-      ],
     }
   },
   async fetch() {

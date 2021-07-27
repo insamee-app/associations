@@ -4,6 +4,7 @@ module.exports = {
   },
   mode: 'jit',
   theme: {
+    transparent: 'transparent',
     colors: {
       primary: {
         base: '#007C77',

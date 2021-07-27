@@ -80,14 +80,5 @@ export default {
   publicRuntimeConfig: {
     insameeURL: process.env.INSAMEE_URL,
     tutoratURL: process.env.TUTORAT_URL,
-    axios: {
-      browserBaseURL: process.env.API_URL,
-    },
-  },
-
-  privateRuntimeConfig: {
-    axios: {
-      baseURL: process.env.API_URL,
-    },
   },
 }
