@@ -24,12 +24,13 @@
     <div class="text-justify mt-8">
       {{ text }}
     </div>
-    <div class="flex justify-end mt-8">
-      <InsameeAppButton :disabled="email" :href="`mailto:${email}`">
+    <div class="flex justify-between items-center mt-8">
+      <Report />
+      <InsameeAppButton shadow :disabled="email" :href="`mailto:${email}`">
         Contacter l'association
       </InsameeAppButton>
     </div>
-    <p v-if="!email" class="text-justify font-bold max-w-sm mx-auto mt-2">
+    <p v-if="!email" class="text-justify font-bold max-w-sm mx-auto mt-8">
       Cette association n’a renseigné aucun moyen de contact, mais vous pouvez
       la contacter via ses membres !
     </p>

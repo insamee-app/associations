@@ -2,6 +2,7 @@ export const state = () => ({
   thematics: [],
   tags: [],
   schools: [],
+  reasonsAssociations: [],
 })
 
 export const mutations = {
@@ -12,8 +13,13 @@ export const mutations = {
 
 export const actions = {
   async fetch({ state, commit }, name) {
+    const endpoint = name.includes('reasons')
+      ? name.toLowerCase().includes('associations')
+        ? '/api/v1/reasons?platform=associations'
+        : '/api/v1/reasons?platform=insamee'
+      : `/api/v1/${name}?serialize=filter`
     if (!state[name].length) {
-      const { data } = await this.$axios.get(`/api/v1/${name}?serialize=filter`)
+      const { data } = await this.$axios.get(endpoint)
       commit('set', { name, value: data })
     }
   },
@@ -36,6 +42,12 @@ export const getters = {
     return state.schools.map((school) => ({
       text: school.name,
       value: school.id,
+    }))
+  },
+  reasonsAssociations(state) {
+    return state.reasonsAssociations.map((reason) => ({
+      text: reason.name,
+      value: reason.id,
     }))
   },
 }
