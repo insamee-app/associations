@@ -23,7 +23,7 @@ export default {
     ],
     link: [{ rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }],
     bodyAttrs: {
-      class: ['relative bg-white-dark'],
+      class: ['relative bg-white-dark text-black'],
     },
   },
 
