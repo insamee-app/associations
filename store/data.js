@@ -3,6 +3,7 @@ export const state = () => ({
   tags: [],
   schools: [],
   reasonsAssociations: [],
+  reasonsProfiles: [],
 })
 
 export const mutations = {
@@ -46,6 +47,12 @@ export const getters = {
   },
   reasonsAssociations(state) {
     return state.reasonsAssociations.map((reason) => ({
+      text: reason.name,
+      value: reason.id,
+    }))
+  },
+  reasonsProfiles(state) {
+    return state.reasonsProfiles.map((reason) => ({
       text: reason.name,
       value: reason.id,
     }))

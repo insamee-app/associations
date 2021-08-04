@@ -1,6 +1,6 @@
 <template>
   <div>
-    <!-- TODO: ensuite il faut ajouter le singelemnt dans un form pour avoir le entrer et faire une gestion de l'erreur  sous le envoyer (et sous le bouton de signelemnt) et la value dans report (app check) peut être un number et gestion du already -->
+    <!-- TODO: ensuite il faut ajouter le singelemnt dans un form pour avoir le entrer-->
     <InsameeIconSpinner
       v-if="loadingReasons"
       class="h-6 w-6 text-secondary-base fill-current animate-spin"
@@ -10,20 +10,14 @@
       class="text-sm text-grey-secondary-base"
     >
       <template v-if="errorReasons"> Une erreur est survenue </template>
-      <template v-if="!report.already"> Merci de votre signalement </template>
+      <template v-else-if="!report.already">
+        Merci de votre signalement
+      </template>
       <template v-else-if="report.already">
-        Vous avez déjà signalé cette association
+        {{ alreadyReported }}
       </template>
     </div>
-    <InsameeAppButton
-      v-else
-      border
-      shadow
-      variant="secondary"
-      @click="modal = true"
-    >
-      Signaler l'association
-    </InsameeAppButton>
+    <slot v-else :on="{ click: onClick }"></slot>
     <Portal>
       <InsameeAppModal :value="modal" @outside="modal = $event">
         <InsameeReport
@@ -46,6 +40,15 @@ export default {
   components: {
     Portal,
   },
+  props: {
+    type: {
+      type: String,
+      required: true,
+      validator(value) {
+        return ['profiles', 'associations'].includes(value)
+      },
+    },
+  },
   data() {
     return {
       modal: false,
@@ -58,25 +61,40 @@ export default {
   },
   computed: {
     reasons() {
-      return this.$store.getters['data/reasonsAssociations']
+      return this.$store.getters[`data/${this.nameReason}`]
+    },
+    nameReason() {
+      if (this.type === 'profiles') return 'reasonsProfiles'
+      else if (this.type === 'associations') return 'reasonsAssociations'
+
+      return ''
+    },
+    alreadyReported() {
+      if (this.type === 'profiles') return 'Vous avez déjà signalé ce profil'
+      else if (this.type === 'associations')
+        return 'Vous avez déjà signalé cette association'
+      return ''
     },
   },
   async created() {
     this.loadingReasons = true
     try {
-      await this.$store.dispatch('data/fetch', 'reasonsAssociations')
+      await this.$store.dispatch('data/fetch', this.nameReason)
     } catch (error) {
       this.errorReasons = true
     }
     this.loadingReasons = false
   },
   methods: {
+    onClick() {
+      this.modal = true
+    },
     async send(data) {
       this.loading = true
       const id = this.$route.params.id
       try {
         const response = await this.$axios.post(
-          `/api/v1/associations/${id}/reports`,
+          `/api/v1/${this.type}/${id}/reports`,
           {
             reason: data.report.value,
             description: data.details,

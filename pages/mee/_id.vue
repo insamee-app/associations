@@ -12,7 +12,15 @@
     :associations="profile.insamee_profile.associations"
     :socials="socials"
     :avatar-url="profile.avatar_url"
-  />
+  >
+    <template #report>
+      <Report v-slot="{ on }" type="profiles">
+        <InsameeAppButton empty variant="secondary" v-on="on">
+          Signaler le mee
+        </InsameeAppButton>
+      </Report>
+    </template>
+  </InsameeMeeInsameeProfile>
 </template>
 
 <script>
