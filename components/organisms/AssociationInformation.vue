@@ -25,7 +25,11 @@
       {{ text }}
     </div>
     <div class="flex justify-between items-center mt-8">
-      <Report />
+      <Report v-slot="{ on }" type="associations">
+        <InsameeAppButton shadow border variant="secondary" v-on="on">
+          Signaler l'association
+        </InsameeAppButton>
+      </Report>
       <InsameeAppButton shadow :disabled="email" :href="`mailto:${email}`">
         Contacter l'association
       </InsameeAppButton>
