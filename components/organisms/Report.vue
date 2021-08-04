@@ -1,6 +1,5 @@
 <template>
   <div>
-    <!-- TODO: ensuite il faut ajouter le singelemnt dans un form pour avoir le entrer-->
     <InsameeIconSpinner
       v-if="loadingReasons"
       class="h-6 w-6 text-secondary-base fill-current animate-spin"
@@ -18,7 +17,7 @@
       </template>
     </div>
     <slot v-else :on="{ click: onClick }"></slot>
-    <Portal>
+    <Portal v-if="modal">
       <InsameeAppModal :value="modal" @outside="modal = $event">
         <InsameeReport
           :loading="loading"
