@@ -1,10 +1,10 @@
 <template>
   <div>
+    <div v-if="error">Une erreur est survenue</div>
     <InsameeIconSpinner
-      v-if="!items.length"
+      v-else-if="!items.length"
       class="animate-spin text-secondary-base fill-current mx-auto"
     />
-    <div v-else-if="error">Une erreur est survenue</div>
     <InsameeComboboxMultiple
       v-else
       variant="secondary"
