@@ -110,7 +110,7 @@ export default {
   },
   async fetch() {
     const query = this.$store.getters['filters/getAssociationsSearchParams']
-    const path = `/api/v1/associations?${query}&serialize=card`
+    const path = `/api/v1/associations?${query}&serialize=card&platform=associations`
 
     const { data } = await this.$axios.get(path)
 

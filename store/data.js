@@ -15,10 +15,8 @@ export const mutations = {
 export const actions = {
   async fetch({ state, commit }, name) {
     const endpoint = name.includes('reasons')
-      ? name.toLowerCase().includes('associations')
-        ? '/api/v1/reasons?platform=associations'
-        : '/api/v1/reasons?platform=insamee'
-      : `/api/v1/${name}?serialize=filter`
+      ? `/api/v1/reasons?resource=${name.replace('reasons', '').toLowerCase()}`
+      : `/api/v1/${name}?serialize=filter&platform=associations`
     if (!state[name].length) {
       const { data } = await this.$axios.get(endpoint)
       commit('set', { name, value: data })

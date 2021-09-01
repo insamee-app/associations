@@ -27,7 +27,9 @@ export default {
     const path = '/api/v1/associations'
     const { id } = params
 
-    const { data: association } = await $axios.get(`${path}/${id}`)
+    const { data: association } = await $axios.get(
+      `${path}/${id}?platform=associations`
+    )
 
     return {
       association,
