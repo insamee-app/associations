@@ -965,10 +965,10 @@
   resolved "https://registry.yarnpkg.com/@humanwhocodes/object-schema/-/object-schema-1.2.0.tgz#87de7af9c231826fdd68ac7258f77c429e0e5fcf"
   integrity sha512-wdppn25U8z/2yiaT6YGquE6X8sSv7hNMWSXYSSU1jGv/yd6XqjXgTDJ8KP4NgjTXfJ3GbRjeeb8RTV7a/VpM+w==
 
-"@insamee-app/components@^0.1.8":
-  version "0.1.8"
-  resolved "https://registry.yarnpkg.com/@insamee-app/components/-/components-0.1.8.tgz#71836df4d7e47f0180ec8aad6cb9231e95c2d616"
-  integrity sha512-bFAB8D1g/Zm0KvBxz++VdQYkkGujm+/6rhEuMt3q/fikvp1Y56vOITrgqXlIq0HLxMOBvp68tJ40WdSucki+rA==
+"@insamee-app/components@^0.1.9":
+  version "0.1.9"
+  resolved "https://registry.yarnpkg.com/@insamee-app/components/-/components-0.1.9.tgz#69a9b1de5816f002e8b5f0414b57e57193011a20"
+  integrity sha512-JTIBph8dQkK6Cb6ahQDFnQBvMvHqb+DsTXAnqmYFbi/J95rf0xKHKkgwPSO/u6vhYvlHDrO6qNYJD3fBVAtdDw==
   dependencies:
     "@linusborg/vue-simple-portal" "^0.1.5"
     v-scroll-lock "^1.3.1"
