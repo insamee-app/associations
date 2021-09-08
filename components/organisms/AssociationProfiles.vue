@@ -1,9 +1,9 @@
 <template>
   <section>
-    <div class="text-secondary-dark text-lg">Membres :</div>
+    <div class="text-secondary-dark text-lg">Membres</div>
     <template v-if="pagination.total">
       <template v-if="profiles.length">
-        <div class="grid gap-4 lg:gap-8 grid-cols-1 md:grid-cols-2">
+        <div class="grid gap-4 lg:gap-8 grid-cols-1 md:grid-cols-2 mt-4">
           <InsameeProfileCard
             v-for="profile in profiles"
             :key="profile.id"
@@ -36,7 +36,15 @@
         />
       </template>
       <template v-else>
-        Il semble que vous ne soyez pas sur la bonne page !
+        <div class="mt-4">
+          Il semble que vous ne soyez pas sur la bonne page pour trouver des
+          profils !
+          <div class="flex justify-center mt-4">
+            <InsameeAppButton empty @click="$emit('pagination', 1)">
+              Revenir à la première page ?
+            </InsameeAppButton>
+          </div>
+        </div>
       </template>
     </template>
     <template v-else>

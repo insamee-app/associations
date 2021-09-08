@@ -21,19 +21,24 @@
       <div class="text-primary-light text-lg capitalize">{{ thematic }}</div>
       <InsameeAppChips :texts="tags" />
     </div>
-    <div class="text-justify mt-8">
+    <div class="text-justify mt-8 text-lg">
       {{ text }}
     </div>
-    <div class="flex justify-between items-center mt-8">
-      <Report v-slot="{ on }" type="associations">
-        <InsameeAppButton shadow border variant="secondary" v-on="on">
-          Signaler l'association
-        </InsameeAppButton>
-      </Report>
-      <InsameeAppButton shadow :disabled="email" :href="`mailto:${email}`">
+    <div class="flex justify-center items-center mt-8">
+      <InsameeAppButton
+        shadow
+        :disabled="!hasEmail"
+        :href="`mailto:${email}`"
+        variant="secondary"
+      >
         Contacter l'association
       </InsameeAppButton>
     </div>
+    <Report v-slot="{ on }" type="associations" class="mt-4">
+      <InsameeAppButton empty variant="grey-secondary" v-on="on">
+        Signaler l'association
+      </InsameeAppButton>
+    </Report>
     <p v-if="!email" class="text-justify font-bold max-w-sm mx-auto mt-8">
       Cette association n’a renseigné aucun moyen de contact, mais vous pouvez
       la contacter via ses membres !
@@ -72,6 +77,11 @@ export default {
     email: {
       type: String,
       default: undefined,
+    },
+  },
+  computed: {
+    hasEmail() {
+      return !!this.email
     },
   },
 }

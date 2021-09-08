@@ -15,7 +15,7 @@
   >
     <template #report>
       <Report v-slot="{ on }" type="profiles">
-        <InsameeAppButton empty variant="secondary" v-on="on">
+        <InsameeAppButton empty variant="grey-secondary" v-on="on">
           Signaler le mee
         </InsameeAppButton>
       </Report>
