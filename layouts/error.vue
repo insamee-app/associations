@@ -1,9 +1,9 @@
 <template>
   <section class="text-center">
     <template v-if="error.statusCode === 404">
-      <Insamee404 :error="error" :to="{ name: 'associations' }">
+      <InsameeError404 :error="error" :to="{ name: 'associations' }">
         Regarder les associations ?
-      </Insamee404>
+      </InsameeError404>
     </template>
     <template v-else>
       <InsameeErrorGlobal :error="error" :to="{ name: 'index' }">
