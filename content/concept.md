@@ -4,7 +4,7 @@
 
 > La plateforme de mise en relation des associations
 
-**Associations** est une plateforme de l'écosystème **TEAM**. Complémentaire à Insamee, elle vous permet de trouver des associations et les profils au sein de ses associations.
+**Associations** est une plateforme de l'écosystème **TEAM**. Complémentaire à Insamee, elle te permet de trouver des associations et les profils au sein de ses associations.
 
 Avec **Associations**, tu vas pouvoir trouver des personnes qui ont les mêmes centres d'intérêt associatif que toi ! Tu vas aussi pouvoir explorer l'ensemble des associations de ton campus pour rejoindre celle qui te plaît ou bien découvrir l'une d'une autre école pour t'aider à monter la tienne ! Président d'une association, responsable d'un évènement ou simplement porteur d'un projet, tu vas pouvoir trouver d'autres associations avec qui t'associer pour collaborer, sur le même campus ou en inter-école comme le High-five !
 
