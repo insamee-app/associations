@@ -28,7 +28,7 @@
       <InsameeAppButton
         shadow
         :disabled="!hasEmail"
-        :href="`mailto:${email}`"
+        :href="hasEmail ? `mailto:${email}` : ''"
         variant="secondary"
       >
         Contacter l'association
