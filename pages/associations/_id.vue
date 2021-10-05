@@ -23,16 +23,19 @@ import getTexts from '@/mixins/getTexts'
 export default {
   mixins: [getTexts],
   middleware: 'authenticated',
-  async asyncData({ params, $axios }) {
+  async asyncData({ params, $axios, error }) {
     const path = '/api/v1/associations'
     const { id } = params
 
-    const { data: association } = await $axios.get(
-      `${path}/${id}?platform=associations`
-    )
-
-    return {
-      association,
+    try {
+      const { data: association } = await $axios.get(
+        `${path}/${id}?platform=associations`
+      )
+      return {
+        association,
+      }
+    } catch (e) {
+      error(e.response.data)
     }
   },
   data() {
