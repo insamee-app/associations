@@ -2,7 +2,12 @@
   <main class="pt-16 w-full h-screen flex flex-col overflow-hidden relative">
     <div class="flex justify-center">
       <NuxtLink :to="{ name: 'index' }">
-        <InsameeIconAssociations class="w-32 h-32 mx-auto" />
+        <NuxtImg
+          src="/logos/associations.png"
+          height="128"
+          alt="logo de la plateforme associations"
+          class="mx-auto"
+        />
       </NuxtLink>
     </div>
     <Nuxt />
