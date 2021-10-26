@@ -965,10 +965,10 @@
   resolved "https://registry.yarnpkg.com/@humanwhocodes/object-schema/-/object-schema-1.2.0.tgz#87de7af9c231826fdd68ac7258f77c429e0e5fcf"
   integrity sha512-wdppn25U8z/2yiaT6YGquE6X8sSv7hNMWSXYSSU1jGv/yd6XqjXgTDJ8KP4NgjTXfJ3GbRjeeb8RTV7a/VpM+w==
 
-"@insamee-app/components@^0.1.21":
-  version "0.1.21"
-  resolved "https://registry.yarnpkg.com/@insamee-app/components/-/components-0.1.21.tgz#6704e7bea2b50c30eaf1708eb400dc950c996a24"
-  integrity sha512-DsIXqqKXte8eKI3czeSfGsjUNwBkcYxwOKszEPWqYtBhfGYUgX0vJJzQ1gvKLGHCKdV1/kD8ppMrOZIvMOz2YA==
+"@insamee-app/components@^0.1.22":
+  version "0.1.22"
+  resolved "https://registry.yarnpkg.com/@insamee-app/components/-/components-0.1.22.tgz#01db983b1c91c6d0661a291a0a9bcd51db695619"
+  integrity sha512-Fef1zgnzrh+jW2i7HeHkm4Sa15wMBgMCnI2WqzIBHmO0YMAjzCXwiq8RQ1QbiiWXOLMCmiBxzqdISkO7RlGYYQ==
   dependencies:
     "@linusborg/vue-simple-portal" "^0.1.5"
     focus-trap "^6.7.1"
