@@ -55,6 +55,11 @@ export default {
     this.profiles = data.data
     this.pagination = data.meta
   },
+  head() {
+    return {
+      title: `${this.association.name.toUpperCase()}`,
+    }
+  },
   watch: {
     '$route.query'() {
       this.parseUrl()

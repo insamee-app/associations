@@ -113,6 +113,11 @@ export default {
     this.associations = data.data
     this.pagination = data.meta
   },
+  head() {
+    return {
+      title: 'Les associations',
+    }
+  },
   computed: {
     mdAndDown() {
       return !this.$screen.lg

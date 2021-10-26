@@ -7,6 +7,11 @@
 <script>
 export default {
   layout: 'minimal',
+  head() {
+    return {
+      title: "S'inscrire",
+    }
+  },
   beforeMount() {
     window.location.href = this.$config.insameeURL + '/signup'
   },

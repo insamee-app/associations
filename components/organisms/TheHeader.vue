@@ -6,7 +6,13 @@
   >
     <template #name>
       <template v-if="$screen.md"> Associations </template>
-      <template v-else> <InsameeIconAssociations class="w-6 h-6" /> </template>
+      <template v-else>
+        <NuxtImg
+          src="/logos/associations.png"
+          height="24"
+          alt="logo de la plateforme associations"
+        />
+      </template>
     </template>
     <template #nav>
       <InsameeHeaderNav v-if="$screen.md">
@@ -18,13 +24,7 @@
         <InsameeAppButton :to="{ name: 'associations' }">
           Trouver des associations
         </InsameeAppButton>
-        <InsameeAppTeam
-          v-if="$screen.md"
-          :link-tutorat="$config.tutoratURL"
-          :link-evenements="$config.insameeURL"
-          link-associations="/"
-          :link-insamee="$config.insameeURL"
-        />
+        <AppTeam v-if="$screen.md" />
       </template>
       <InsameeAppButton
         v-if="!loggedIn() && $screen.md"
