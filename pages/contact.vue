@@ -11,5 +11,10 @@ export default {
       mail: 'mailto:contact@insamee.fr',
     }
   },
+  head() {
+    return {
+      title: 'Nous contacter',
+    }
+  },
 }
 </script>

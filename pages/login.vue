@@ -7,6 +7,11 @@
 <script>
 export default {
   layout: 'minimal',
+  head() {
+    return {
+      title: 'Se connecter',
+    }
+  },
   beforeMount() {
     window.location.href =
       this.$config.insameeURL + '/login?redirect=associations'
